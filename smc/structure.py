@@ -1,15 +1,15 @@
-def detect_smc_structure(df, trend):
-    recent = df.tail(5)
-    if trend == "uptrend" and recent['high'].iloc[-1] > recent['high'].iloc[-2]:
-        return True
-    elif trend == "downtrend" and recent['low'].iloc[-1] < recent['low'].iloc[-2]:
-        return True
-    return False
+def detect_structure(data, trend=None):
+    latest = data.iloc[-1]
+    previous = data.iloc[-2]
 
-def is_structure_confirmed(df, trend):
-    recent = df.tail(10)
-    if trend == 'uptrend':
-        return recent['high'].iloc[-1] > recent['high'].iloc[-2]
-    elif trend == 'downtrend':
-        return recent['low'].iloc[-1] < recent['low'].iloc[-2]
-    return False
+    current_trend = trend or ("bullish" if latest['ema50'] > latest['ema200'] else "bearish")
+
+    choch = (
+        (previous['ema50'] < previous['ema200'] and latest['ema50'] > latest['ema200']) or
+        (previous['ema50'] > previous['ema200'] and latest['ema50'] < latest['ema200'])
+    )
+
+    return {
+        "trend": current_trend,
+        "choch": choch,
+    }
