@@ -1,0 +1,16 @@
+DataLoader (fetch data) 
+  ↓
+IndicatorCalculator (RSI/EMA/MACD)
+  ↓
+StructureAnalyzer (BOS/CHoCH detection)
+  ↓
+SignalGenerator (tạo entry signals)
+  ↓
+Notifier (gửi Telegram + lưu CSV log)
+
+
+1. Lấy dữ liệu nến từ Binance API.
+2. Tính toán các chỉ báo kỹ thuật (RSI, EMA, MACD, v.v.).
+3. Xác định xu hướng và kiểm tra cấu trúc thị trường trên khung thời gian lớn.
+4. Phát hiện Order Block, xác nhận trigger, kiểm tra động lượng, và tìm điểm vào lệnh trên khung thời gian nhỏ.
+5. Gửi tín hiệu giao dịch qua Telegram nếu tín hiệu hợp lệ và chưa được gửi trước đó.
