@@ -3,7 +3,7 @@ import pandas as pd
 
 client = Client()
 
-def get_klines(symbol='BTCUSDT', interval='5m', limit=100):
+def get_klines(symbol='BTCUSDT', interval='5m', limit=210):
     klines = client.get_klines(symbol=symbol, interval=interval, limit=limit)
     df = pd.DataFrame(klines, columns=[
         'timestamp', 'open', 'high', 'low', 'close', 'volume',
@@ -16,12 +16,12 @@ def get_klines(symbol='BTCUSDT', interval='5m', limit=100):
     return df
 
 
-def fetch_btc_data():
-    btc_df = fetch_ohlcv('BTC/USDT', '1h', 50)
-    btc_df = add_indicators(btc_df)
-    btc_trend = determine_trend(btc_df)
-    return btc_trend
+# def fetch_btc_data():
+#     btc_df = fetch_ohlcv('BTC/USDT', '1h', 50)
+#     btc_df = add_indicators(btc_df)
+#     btc_trend = determine_trend(btc_df)
+#     return btc_trend
 
-def fetch_btcd_dominance():
-    dominance_df = fetch_ohlcv('BTC.D', '1h', 50)  # cần nguồn dữ liệu alt hoặc TradingView API
-    return determine_trend(dominance_df)
+# def fetch_btcd_dominance():
+#     dominance_df = fetch_ohlcv('BTC.D', '1h', 50)  # cần nguồn dữ liệu alt hoặc TradingView API
+#     return determine_trend(dominance_df)
